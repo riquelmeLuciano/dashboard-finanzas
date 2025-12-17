@@ -1470,7 +1470,7 @@ st.divider() #--> Separador visual
 # Usamos st.expander para ocultar esta sección por defecto (expanded=False).
 # El usuario puede expandirla si desea ver el cotizaciones del  Dólar Hoy.
 with st.expander("💵 Cotizaciones del  Dólar Hoy ", expanded=False):
-    engine = get_connection()
+    conn = st.connection("neon", type="sql")
 
     
 
@@ -1493,7 +1493,7 @@ with st.expander("💵 Cotizaciones del  Dólar Hoy ", expanded=False):
                 ELSE 6
             END
         """
-        df_cotizaciones = pd.read_sql(query_cotizaciones, engine)
+        df_cotizaciones = conn.query(query_cotizaciones, ttl="10m")
     
         # ----------------------- 2. VISUALIZACION DE TARJETAS (METRICS) -----------------------
         #Filtramos solo los dolares mas relevantes para las tarjetas principales
