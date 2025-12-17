@@ -7,6 +7,13 @@ import numpy as np
 from dotenv import load_dotenv
 import os
 
+#
+#-----------------------------------------------Para correr el archivo en streamlit-----------------------------------------------
+#
+#    cd "c:\Users\lucia\Desktop\Bootcamp\PROYECTO FINAL\Dashboard"   <----- dirrecion de la carpeta a PONER EN LA TERMINAL
+#
+#    streamlit run monitor_financiero.py    <----- para correr el archivo en la TERMINAL
+# 
 
 load_dotenv()
 # --------------------------------------------------CONFIGURACIÓN DE LA PÁGINA--------------------------------------------------
@@ -119,22 +126,15 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --------------------------------------------------CONEXION A LA BASE DE DATOS --------------------------------------------------
-# para usar una BD local, descomentar y modificar la siguiente línea:
-# @st.cache_resource
-# def get_connection():
-#     DB_URL = (
-#         f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}"
-#         f"@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
-#     )
-#     return create_engine(DB_URL)
-
-# NUEVA CONEXIÓN PARA NEON + STREAMLIT CLOUD
-conn = st.connection("neon", type="sql")
-
-
-
+@st.cache_resource
+def get_connection():
+    DB_URL = (
+        f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}"
+        f"@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
+    )
+    return create_engine(DB_URL)
 # --------------------------------------------------FUNCIONES DE CARGA---------------------------------------------------------
-def cargar_inflacion_real(conn, fecha_inicio, fecha_fin):
+def cargar_inflacion_real(engine, fecha_inicio, fecha_fin):
     """
     Obtiene la inflación mensual desde la base de datos y la transforma 
     en una curva de inflación diaria acumulada (índice).
@@ -144,7 +144,7 @@ def cargar_inflacion_real(conn, fecha_inicio, fecha_fin):
     y genera una curva acumulada para poder compararla día a día con otros activos.
 
     Args:
-        conn: Conexión a la base de datos (SQLAlchemy).
+        engine: Conexión a la base de datos (SQLAlchemy).
         fecha_inicio (datetime): Fecha desde donde arranca la serie diaria.
         fecha_fin (datetime): Fecha hasta donde llega la serie diaria.
 
@@ -153,7 +153,7 @@ def cargar_inflacion_real(conn, fecha_inicio, fecha_fin):
     """
     # 1. Obtener datos mensuales de inflación
     query = "SELECT fecha, valor FROM inflacion ORDER BY fecha ASC"
-    df_inf = conn.query(query)
+    df_inf = pd.read_sql(query, engine)
     df_inf['fecha'] = pd.to_datetime(df_inf['fecha'])
     
     # Crear columna 'anio_mes' para hacer el cruce
@@ -199,7 +199,7 @@ def obtener_datos_consolidados(metrica_fci='vcp'):
         pd.DataFrame: Tabla con fechas como índice y columnas para cada activo 
                     (Billeteras, Tipos de Dólar, Inflación).
     """
-    conn = st.connection("neon", type="sql")
+    engine = get_connection()
     
     # ---------------------------------------------------------
     # 1. CARGA Y PROCESAMIENTO DE FCI (Billeteras)
@@ -210,7 +210,7 @@ def obtener_datos_consolidados(metrica_fci='vcp'):
     WHERE billetera IN ('Mercado Pago', 'Ualá', 'Personal Pay')
     ORDER BY fecha ASC
     """
-    df_fci = conn.query(q_fci, ttl="10m")
+    df_fci = pd.read_sql(q_fci, engine)
     df_fci['fecha'] = pd.to_datetime(df_fci['fecha'])
     
     #logica condicional según qué métrica quiere ver el usuario
@@ -264,7 +264,7 @@ def obtener_datos_consolidados(metrica_fci='vcp'):
         FROM cotizaciones_dolar_hist 
         ORDER BY fecha ASC
         """
-        df_dolar = conn.query(q_dolar, ttl="10m")
+        df_dolar = pd.read_sql(q_dolar, engine)
         df_dolar['fecha'] = pd.to_datetime(df_dolar['fecha'])
         
         # Agrupar por día y tipo para obtener promedio (evita duplicados o zig-zag)
@@ -296,7 +296,7 @@ def obtener_datos_consolidados(metrica_fci='vcp'):
     df_cons = df_cons.ffill().dropna() # --> Rellenar huecos hacia adelante (si no hay cotización fin de semana, usa la del viernes)
     
     # Calcular Inflacion para el rango de fechas resultante
-    df_inf = cargar_inflacion_real(conn, df_cons.index.min(), df_cons.index.max())
+    df_inf = cargar_inflacion_real(engine, df_cons.index.min(), df_cons.index.max())
 
     # Unir Inflacion al consolidado
     df_cons = df_cons.join(df_inf.set_index('fecha'), how='left')
