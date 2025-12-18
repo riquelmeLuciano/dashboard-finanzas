@@ -11,18 +11,12 @@ load_dotenv() # Carga las variables de un archivo .env
 
 # --- CONFIGURACIÓN BASE DE DATOS ---
 
-DB_CONFIG = {
-    "dbname": os.getenv("DB_NAME"),
-    "user": os.getenv("DB_USER"),
-    "password": os.getenv("DB_PASSWORD"),
-    "host": os.getenv("DB_HOST"),
-    "port": os.getenv("DB_PORT")
-}
+DATABASE_URL = os.getenv("DATABASE_URL_NEON")
 
 NOMBRE_TABLA = "rendimientos_fci"
 
 # --- CONFIGURACIÓN DE BILLETERAS Y API ---
-DIAS_A_CONSULTAR = 30
+DIAS_A_CONSULTAR = 10
 BILLETERAS_OBJETIVO = {
     "Ualá": ["ualintec", "uala"],
     "Mercado Pago": ["mercado fondo ahorro - clase b"], # Clase B para evitar duplicados del Clase A
@@ -36,7 +30,7 @@ def crear_tabla_postgres():
     conn = None
     try:
         # Conexión a la base de datos
-        conn = psycopg2.connect(**DB_CONFIG)
+        conn = psycopg2.connect(DATABASE_URL)
         cur = conn.cursor()
         
         # SQL para crear la tabla
@@ -57,32 +51,31 @@ def crear_tabla_postgres():
         """
         
         cur.execute(query)
+
+        # Asegurar que exista la columna 'tna' 
+        alter_query = f"ALTER TABLE {NOMBRE_TABLA} ADD COLUMN IF NOT EXISTS tna NUMERIC(10, 4);"
+        cur.execute(alter_query)
+
         conn.commit()
-        
-        # Verificar si existe la columna tna, si no, agregarla
-        cur.execute("""
-            SELECT column_name 
-            FROM information_schema.columns 
-            WHERE table_name = '{NOMBRE_TABLA}' AND column_name = 'tna'
-        """)
-        
-        if cur.fetchone() is None:
-            cur.execute(f"ALTER TABLE {NOMBRE_TABLA} ADD COLUMN tna NUMERIC(10, 4);")
-            conn.commit()
-            print("✅ Columna 'tna' agregada.")
+
+        print("✅ Tabla verificada correctamente.")
         
     except psycopg2.Error as e:
         print(f"❌ Error al conectar o crear tabla: {e}")
     finally:
-        if 'conn' in locals() and conn:
+        if conn:
             cur.close()
             conn.close()
 
 def procesar_api_e_insertar():
+    """Consulta la API e inserta directamente en PostgreSQL sin pasar por CSV."""
+    print("=" * 60)
+    print(f"📡 INICIANDO ETL DIRECTO API -> POSTGRES ({DIAS_A_CONSULTAR} DÍAS)")
+    print("=" * 60)
 
     conn = None
     try:
-        conn = psycopg2.connect(**DB_CONFIG)
+        conn = psycopg2.connect(DATABASE_URL)
         cur = conn.cursor()
         
         fecha_actual = datetime.now()
@@ -97,6 +90,7 @@ def procesar_api_e_insertar():
             
             url = f"https://api.argentinadatos.com/v1/finanzas/fci/mercadoDinero/{fecha_str_api}"
             
+            print(f"⏳ Consultando: {fecha_str_api}...", end=" ")
             
             try:
                 response = requests.get(url, timeout=10)
@@ -150,7 +144,7 @@ def procesar_api_e_insertar():
                             nuevos_registros += 1
                     
                     conn.commit() # Guardar cambios del día
-                    
+                    print(f"✅ Insertados: {len(encontrados_dia)}")
                 else:
                     print("⚠️ Datos vacíos para billeteras objetivo")
 
@@ -160,6 +154,8 @@ def procesar_api_e_insertar():
             # Pequeña pausa para no saturar
             time.sleep(0.2)
 
+        print("-" * 60)
+        print(f"🚀 Proceso de carga finalizado. Nuevos registros: {nuevos_registros}")
 
     except psycopg2.Error as e:
         print(f"❌ Error crítico de Base de Datos: {e}")
@@ -173,7 +169,7 @@ def actualizar_tna_existentes():
     
     conn = None
     try:
-        conn = psycopg2.connect(**DB_CONFIG)
+        conn = psycopg2.connect(DATABASE_URL)
         cur = conn.cursor()
         
         # Obtenemos todo ordenado por Fondo y Fecha para poder comparar con el día anterior

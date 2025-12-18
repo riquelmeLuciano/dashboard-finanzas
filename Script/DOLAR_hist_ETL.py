@@ -7,13 +7,7 @@ import os
 load_dotenv()
 
 # --- CONFIGURACIÓN DE TU BASE DE DATOS ---
-DB_CONFIG = {
-    "dbname": os.getenv("DB_NAME"),
-    "user": os.getenv("DB_USER"),
-    "password": os.getenv("DB_PASSWORD"),
-    "host": os.getenv("DB_HOST"),
-    "port": os.getenv("DB_PORT")
-}    
+DATABASE_URL = os.getenv("DATABASE_URL_NEON") 
 
 # Tipos de dólar a consultar
 TIPOS_DOLAR = ["oficial", "blue", "bolsa", "contadoconliqui", "mayorista", "cripto", "tarjeta"]
@@ -21,7 +15,7 @@ TIPOS_DOLAR = ["oficial", "blue", "bolsa", "contadoconliqui", "mayorista", "crip
 def crear_tabla_historica():
     """Crea la tabla de histórico si no existe"""
     try:
-        conn = psycopg2.connect(**DB_CONFIG)
+        conn = psycopg2.connect(DATABASE_URL)
         cur = conn.cursor()
         
         query = """
@@ -53,7 +47,7 @@ def crear_tabla_historica():
 def guardar_historial_db():
     try:
         # 1. Conexión a la Base de Datos
-        conn = psycopg2.connect(**DB_CONFIG)
+        conn = psycopg2.connect(DATABASE_URL)
         cur = conn.cursor()
         print("✅ Conexión a la base de datos exitosa.")
 

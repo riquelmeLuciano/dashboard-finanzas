@@ -10,13 +10,10 @@ load_dotenv()
 
 # --- CONFIGURACIÓN BASE DE DATOS ---
 
-DB_CONFIG = {
-    "dbname": os.getenv("DB_NAME"),
-    "user": os.getenv("DB_USER"),
-    "password": os.getenv("DB_PASSWORD"),
-    "host": os.getenv("DB_HOST"),
-    "port": os.getenv("DB_PORT")
-}
+DATABASE_URL = os.getenv("DATABASE_URL_NEON")
+
+if not DATABASE_URL:
+    raise ValueError("❌ Error: No se encontró la variable DATABASE_URL_NEON en el archivo .env")
 
 NOMBRE_TABLA_PF = "historial_plazos_fijos"
 URL_API_PF = "https://api.argentinadatos.com/v1/finanzas/tasas/plazoFijo"
@@ -25,7 +22,7 @@ def inicializar_tabla_pf():
     """Crea la tabla para historial de Plazos Fijos si no existe."""
     conn = None
     try:
-        conn = psycopg2.connect(**DB_CONFIG)
+        conn = psycopg2.connect(DATABASE_URL)
         cur = conn.cursor()
         
         # Estructura: Banco, Fecha, y Tasa Nominal Anual (TNA)
@@ -61,7 +58,7 @@ def guardar_tasas_plazo_fijo():
         fecha_hoy = datetime.now().strftime("%Y-%m-%d")
         
         # 2. Conectar a DB
-        conn = psycopg2.connect(**DB_CONFIG)
+        conn = psycopg2.connect(DATABASE_URL)
         cur = conn.cursor()
         
         nuevos = 0

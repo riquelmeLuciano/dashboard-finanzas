@@ -11,13 +11,7 @@ load_dotenv()
 
 # --- CONFIGURACIÓN BASE DE DATOS ---
 
-DB_CONFIG = {
-    "dbname": os.getenv("DB_NAME"),
-    "user": os.getenv("DB_USER"),
-    "password": os.getenv("DB_PASSWORD"),
-    "host": os.getenv("DB_HOST"),
-    "port": os.getenv("DB_PORT")
-}
+DATABASE_URL = os.getenv("DATABASE_URL_NEON")
 
 class ExtractorInflacion:
     """Extrae historial de inflacion desde APIs públicas"""
@@ -77,7 +71,7 @@ class ExtractorInflacion:
     def crear_tabla_db(self):
         """Crea la tabla en PostgreSQL --> si no existe"""
         try:
-            conn = psycopg2.connect(**DB_CONFIG)
+            conn = psycopg2.connect(DATABASE_URL)
             cur = conn.cursor()
             
             query = """
@@ -114,7 +108,7 @@ class ExtractorInflacion:
             return 0
         
         try:
-            conn = psycopg2.connect(**DB_CONFIG)
+            conn = psycopg2.connect(DATABASE_URL)
             cur = conn.cursor()
 
             registros_guardados = 0
