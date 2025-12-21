@@ -58,7 +58,16 @@ PROYECTO FINAL/
 ```
 
 ## 🏗️ Arquitectura del Sistema
+<p align="center">
+  <img src="screenshots/arquitectura_sistema.png" width="850">
+</p>
+La arquitectura del sistema se basa en un flujo ETL donde los datos financieros se obtienen desde una API, se procesan y almacenan en una base de datos PostgreSQL (Neon) y finalmente se consumen desde un dashboard web desarrollado en Streamlit para su análisis interactivo.
 
-![Arquitectura](screenshots/arquitectura.PNG)
+Fuente de datos:
+FCIs: https://api.argentinadatos.com/v1/finanzas/fci/mercadoDinero/{fecha_str_api}  # {fecha_str_api} debes poner la fecha que se quiere obtener
+Dolar hoy: https://dolarapi.com/v1/dolares
+Dolar registros: https://api.argentinadatos.com/v1/cotizaciones/dolares/{tipo}   # {tipo} debes elegir el tipo de Dolar
+Inflación: https://api.argentinadatos.com/v1/finanzas/indices/inflacion
+Plazos fijós: https://api.argentinadatos.com/v1/finanzas/tasas/plazoFijo
 
 
