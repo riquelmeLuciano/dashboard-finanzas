@@ -76,14 +76,24 @@ Las fuentes se consumen mediante APIs públicas y se integran en un pipeline ETL
 
 ## 🌐 Dashboard Web
 
-El dashboard permite:
-- Visualizar métricas financieras clave
-- Comparar instrumentos de inversión
-- Analizar la evolución temporal de variables económicas
-- Interactuar mediante filtros dinámicos
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://monitorfinanciero-tytyevfsnybzcmu5twqtlh.streamlit.app/)
 
-🔗 Acceso al dashboard:  
-https://monitorfinanciero-tytyevfsnybzcmu5twqtlh.streamlit.app/
+### ✨ Funcionalidades
+
+- 📊 **KPIs en tiempo real**: Inflación, Dólar, Mejor FCI, Estado
+- 🔮 **Proyección Simple**: Calcula rendimiento sin aportes adicionales
+- 💎 **Proyección con Aportes**: Simula ahorro sistemático mensual
+- 📊 **Comparador de Fondos**: Ranking automático con medallas 🥇🥈🥉
+- 🎯 **Calculadora de Objetivos**: Calcula aportes para alcanzar tu meta
+- 💵 **Cotizaciones en vivo**: Todos los tipos de dólar con spread
+- 📈 **Análisis histórico**: Visualización de tendencias pasadas
+
+### 🎮 Controles Interactivos
+
+- **Período**: 7 a 90 días
+- **Tipo de Dólar**: Blue, Oficial, MEP, CCL, Cripto, etc.
+- **Métrica FCI**: VCP o TNA
+- **Comparación**: Selección múltiple de instrumentos
 
 ## 📸 Capturas del Dashboard
 
@@ -95,7 +105,7 @@ https://monitorfinanciero-tytyevfsnybzcmu5twqtlh.streamlit.app/
   
 ![Proyeccion_simple](https://github.com/user-attachments/assets/c77cb694-7111-420c-a158-26812a2b850f)
 
-###💎 Proyección con Aportes: Simula ahorro sistemático mensual
+### 💎 Proyección con Aportes: Simula ahorro sistemático mensual
   
 ![Proyeccion_aporte](https://github.com/user-attachments/assets/65cf8053-91e8-45dd-9ff0-160cb1cb5fbe)
 
@@ -103,7 +113,7 @@ https://monitorfinanciero-tytyevfsnybzcmu5twqtlh.streamlit.app/
   
 ![Comparador_fondo](https://github.com/user-attachments/assets/aef4777c-34fe-4191-af68-e4e8b344b9f9)
 
-- 🎯 Calculadora de Objetivos: Calcula aporte mensual necesario para tu meta
+### 🎯 Calculadora de Objetivos: Calcula aporte mensual necesario para tu meta
 
 ![calculadora_objetivos](https://github.com/user-attachments/assets/7610a7c0-0a68-403b-a1a6-e9848113a776)
 
@@ -120,14 +130,28 @@ https://monitorfinanciero-tytyevfsnybzcmu5twqtlh.streamlit.app/
 ![dolar_hoy](https://github.com/user-attachments/assets/bed0cc28-0296-41ab-8acc-b44d1be6b70e)
 
 ---
+## A Futuro . . .
+
+### En desarrollo
+- [ ] Análisis de Escenarios (Optimista/Base/Pesimista)
+- [ ] Notificaciones y alertas automáticas
+- [ ] Exportar reportes en PDF/Excel
+- [ ] Automatizar los procesos ETL
+
+### Futuras mejoras
+- [ ] Integración con más activos (CEDEARs, Bonos, ...)
+- [ ] Machine Learning para predicciones
+- [ ] API REST pública
+
 
 ## 🧠 Conclusiones
 
-El proyecto integra análisis y ingeniería de datos en una solución completa, demostrando la capacidad de construir pipelines de datos y visualizaciones orientadas a la toma de decisiones.
+El proyecto integra análisis e ingeniería de datos en una solución completa, demostrando la capacidad de construir pipelines de datos y visualizaciones orientadas a la toma de decisiones.
 
 ## 👤 Autor
 
 **Luciano Riquelme** 
+
 Estudiante de Lic. en Sistemas 
 Interés en Data Analytics y Data Engineering
 
@@ -137,7 +161,7 @@ Interés en Data Analytics y Data Engineering
 ---
 ## 🙏 Agradecimientos
 
-Bootcamp 4.0 – Devlights, por el acompañamiento y los conocimientos brindados.
+Bootcamp 4.0 – Devlights, por el acompañamiento y el tiempo brindados.
 
 
 
