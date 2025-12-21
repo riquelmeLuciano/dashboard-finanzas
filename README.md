@@ -61,13 +61,37 @@ PROYECTO FINAL/
 <p align="center">
   <img src="screenshots/arquitectura_sistema.png" width="850">
 </p>
-La arquitectura del sistema se basa en un flujo ETL donde los datos financieros se obtienen desde una API, se procesan y almacenan en una base de datos PostgreSQL (Neon) y finalmente se consumen desde un dashboard web desarrollado en Streamlit para su análisis interactivo.
+La arquitectura del sistema se basa en un flujo ETL donde los datos financieros se obtienen desde distintas APIs públicas, se procesan y almacenan en una base de datos PostgreSQL (Neon) y finalmente se consumen desde un dashboard web desarrollado en Streamlit para su análisis interactivo.
 
-Fuente de datos:
-FCIs: https://api.argentinadatos.com/v1/finanzas/fci/mercadoDinero/{fecha_str_api}  # {fecha_str_api} debes poner la fecha que se quiere obtener
-Dolar hoy: https://dolarapi.com/v1/dolares
-Dolar registros: https://api.argentinadatos.com/v1/cotizaciones/dolares/{tipo}   # {tipo} debes elegir el tipo de Dolar
-Inflación: https://api.argentinadatos.com/v1/finanzas/indices/inflacion
-Plazos fijós: https://api.argentinadatos.com/v1/finanzas/tasas/plazoFijo
+## 💡 Problema que resuelve
+
+El proyecto permite centralizar y analizar información financiera dispersa (FCI, dólar e inflación), facilitando la comparación de rendimientos y el análisis de tendencias económicas de forma visual e interactiva.
+
+
+## 🔌 Fuentes de datos
+
+- Fondos Comunes de Inversión (FCI)
+- Cotización del dólar (actual e histórica)
+- Índices de inflación en Argentina
+- Tasas de interés de plazos fijos
+
+Las fuentes se consumen mediante APIs públicas y se integran en un pipeline ETL.
+
+## 🌐 Dashboard Web
+
+El dashboard permite:
+- Visualizar métricas financieras clave
+- Comparar instrumentos de inversión
+- Analizar la evolución temporal de variables económicas
+- Interactuar mediante filtros dinámicos
+
+🔗 Acceso al dashboard:  
+https://monitorfinanciero-tytyevfsnybzcmu5twqtlh.streamlit.app/
+
+## 📸 Capturas del Dashboard
+![Dashboard principal](screenshots/principal.PNG)
+
+- 🔮 Proyección Simple: Calcula cuánto tendrás en X meses sin aportes
+![Proyección Simple](screenshots/Proyeccion simple.gif)
 
 
