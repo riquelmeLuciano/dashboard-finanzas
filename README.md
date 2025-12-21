@@ -92,6 +92,6 @@ https://monitorfinanciero-tytyevfsnybzcmu5twqtlh.streamlit.app/
 ![Dashboard principal](screenshots/principal.PNG)
 
 - 🔮 Proyección Simple: Calcula cuánto tendrás en X meses sin aportes
-![Proyección Simple](screenshots/proyeccion_simple.gif)
+![Proyección simple](screenshots/proyeccion_simple.gif)
 
 
