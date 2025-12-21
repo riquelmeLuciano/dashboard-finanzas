@@ -59,7 +59,7 @@ PROYECTO FINAL/
 
 ## 🏗️ Arquitectura del Sistema
 <p align="center">
-  <img src="screenshots/arquitectura_sistema.png" width="850">
+  <img src="screenshots/arquitectura.PNG" width="850">
 </p>
 La arquitectura del sistema se basa en un flujo ETL donde los datos financieros se obtienen desde distintas APIs públicas, se procesan y almacenan en una base de datos PostgreSQL (Neon) y finalmente se consumen desde un dashboard web desarrollado en Streamlit para su análisis interactivo.
 
@@ -89,28 +89,35 @@ El dashboard permite:
 https://monitorfinanciero-tytyevfsnybzcmu5twqtlh.streamlit.app/
 
 ## 📸 Capturas del Dashboard
+
 ![Dashboard principal](screenshots/principal.PNG)
 
 - 🔮 Proyección Simple: Calcula cuánto tendrás en X meses sin aportes
+  
 ![Proyeccion_simple](https://github.com/user-attachments/assets/c77cb694-7111-420c-a158-26812a2b850f)
 
 - 💎 Proyección con Aportes: Simula ahorro sistemático mensual
+  
 ![Proyeccion_aporte](https://github.com/user-attachments/assets/65cf8053-91e8-45dd-9ff0-160cb1cb5fbe)
 
 - 📊 Comparador de Fondos: Ranking automático de todos los FCIs
+  
 ![Comparador_fondo](https://github.com/user-attachments/assets/aef4777c-34fe-4191-af68-e4e8b344b9f9)
 
-🎯 Calculadora de Objetivos: Calcula aporte mensual necesario para tu meta
+- 🎯 Calculadora de Objetivos: Calcula aporte mensual necesario para tu meta
+
 ![calculadora_objetivos](https://github.com/user-attachments/assets/7610a7c0-0a68-403b-a1a6-e9848113a776)
 
 ---
 
-- 📈 Análisis histórico: Visualización de datos pasados 
+- 📈 Análisis histórico: Visualización de datos pasados
+   
 ![analicis_historico](https://github.com/user-attachments/assets/042c999d-2102-4b0d-bc10-ad1c6c134b10)
 
 ---
 
-- 💵 Cotizaciones en vivo: Dólar Blue, Oficial, MEP, CCL, Cripto
+- 💵 Cotizaciones: Dólar Blue, Oficial, MEP, CCL, Cripto
+  
 ![dolar_hoy](https://github.com/user-attachments/assets/bed0cc28-0296-41ab-8acc-b44d1be6b70e)
 
 ---
