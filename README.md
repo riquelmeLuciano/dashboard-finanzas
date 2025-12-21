@@ -23,7 +23,9 @@ Proyecto final del Bootcamp 4.0 (Devlights), enfocado en el análisis, procesami
 - sql / neon
 - api
 
-## 📂 Estructura del proyecto 
+## 📂 Estructura del proyecto
+
+```text
 PROYECTO FINAL/
 │
 ├── .devcontainer/                 # Configuración del entorno de desarrollo (Docker)
@@ -42,9 +44,9 @@ PROYECTO FINAL/
 ├── Script/
 │   ├── DOLAR_AHORA_ETL.py          # ETL de cotizaciones actuales de distintos tipos de dólar
 │   ├── DOLAR_hist_ETL.py           # ETL histórico de cotizaciones del dólar
-│   ├── FCI_api_ETL.py              # ETL de Fondos Comunes de Inversión (Ualá, Mercado Pago, Personal Pay)
-│   ├── INFLACION_api_ETL.py        # ETL de datos mensuales de inflación en Argentina
-│   └── plazoFijo_api_ETL.py        # ETL de tasas de plazo fijo (registro histórico)
+│   ├── FCI_api_ETL.py              # ETL de FCI (Ualá, Mercado Pago, Personal Pay)
+│   ├── INFLACION_api_ETL.py        # ETL de inflación mensual en Argentina
+│   └── plazoFijo_api_ETL.py        # ETL de tasas de plazo fijo (histórico)
 │
 ├── .env.example                    # Ejemplo de variables de entorno
 ├── .gitignore                     # Archivos ignorados por Git
@@ -53,6 +55,7 @@ PROYECTO FINAL/
 ├── Dockerfile                      # Imagen del proyecto
 ├── requirements.txt                # Dependencias del proyecto
 └── README.md
+```
 
 
 
