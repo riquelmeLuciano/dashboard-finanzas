@@ -49,7 +49,7 @@ PROYECTO FINAL/
 │   └── plazoFijo_api_ETL.py        # ETL de tasas de plazo fijo (histórico)
 │
 ├── .env.example                    # Ejemplo de variables de entorno
-├── .gitignore                     # Archivos ignorados por Git
+├── .gitignore                      # Archivos ignorados por Git
 ├── backup_finanzas.sql             # Backup de la base de datos
 ├── docker-compose.yml              # Orquestación de servicios con Docker
 ├── Dockerfile                      # Imagen del proyecto
@@ -57,6 +57,8 @@ PROYECTO FINAL/
 └── README.md
 ```
 
+## 🏗️ Arquitectura del Sistema
 
+![Arquitectura](screenshots/arquitectura.PNG)
 
 
