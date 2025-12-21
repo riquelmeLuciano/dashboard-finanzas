@@ -10,18 +10,15 @@ Proyecto final del Bootcamp 4.0 (Devlights), enfocado en el análisis, procesami
 - Visualizar métricas clave en un dashboard interactivo.
 
 ## 🛠️ Tecnologías
-- Python    
-- Pandas
-- NumPy
-- Matplotlib / Seaborn / plotly
-- streamlit
-- sqlalchemy / psycopg2
-- requests
-- Git / GitHub
-- Docker
-- ETL
-- sql / neon
-- api
+
+- **Lenguaje:** Python  
+- **Análisis de datos:** Pandas, NumPy  
+- **Visualización:** Matplotlib, Seaborn, Plotly, Streamlit  
+- **Base de datos:** PostgreSQL (Neon)  
+- **Acceso a datos:** SQLAlchemy, psycopg2, Requests  
+- **Infraestructura:** Docker, Docker Compose  
+- **Control de versiones:** Git & GitHub  
+- **Arquitectura:** ETL, consumo de APIs
 
 ## 📂 Estructura del proyecto
 
@@ -90,17 +87,19 @@ https://monitorfinanciero-tytyevfsnybzcmu5twqtlh.streamlit.app/
 
 ## 📸 Capturas del Dashboard
 
+### 📊 Dashboard principal
+
 ![Dashboard principal](screenshots/principal.PNG)
 
-- 🔮 Proyección Simple: Calcula cuánto tendrás en X meses sin aportes
+### 🔮 Proyección Simple: Calcula cuánto tendrás en X meses sin aportes
   
 ![Proyeccion_simple](https://github.com/user-attachments/assets/c77cb694-7111-420c-a158-26812a2b850f)
 
-- 💎 Proyección con Aportes: Simula ahorro sistemático mensual
+###💎 Proyección con Aportes: Simula ahorro sistemático mensual
   
 ![Proyeccion_aporte](https://github.com/user-attachments/assets/65cf8053-91e8-45dd-9ff0-160cb1cb5fbe)
 
-- 📊 Comparador de Fondos: Ranking automático de todos los FCIs
+### 📊 Comparador de Fondos: Ranking automático de todos los FCIs
   
 ![Comparador_fondo](https://github.com/user-attachments/assets/aef4777c-34fe-4191-af68-e4e8b344b9f9)
 
@@ -110,21 +109,35 @@ https://monitorfinanciero-tytyevfsnybzcmu5twqtlh.streamlit.app/
 
 ---
 
-- 📈 Análisis histórico: Visualización de datos pasados
+### 📈 Análisis histórico: Visualización de datos pasados
    
 ![analicis_historico](https://github.com/user-attachments/assets/042c999d-2102-4b0d-bc10-ad1c6c134b10)
 
 ---
 
-- 💵 Cotizaciones: Dólar Blue, Oficial, MEP, CCL, Cripto
+### 💵 Cotizaciones: Dólar Blue, Oficial, MEP, CCL, Cripto
   
 ![dolar_hoy](https://github.com/user-attachments/assets/bed0cc28-0296-41ab-8acc-b44d1be6b70e)
 
 ---
 
+## 🧠 Conclusiones
 
+El proyecto integra análisis y ingeniería de datos en una solución completa, demostrando la capacidad de construir pipelines de datos y visualizaciones orientadas a la toma de decisiones.
 
+## 👤 Autor
 
+**Luciano Riquelme** 
+Estudiante de Lic. en Sistemas 
+Interés en Data Analytics y Data Engineering
+
+- 🔗 LinkedIn: https://www.linkedin.com/in/luciano-riquelme  
+- 📧 Email: luciano.luiz.riquelme@gmail.com
+
+---
+## 🙏 Agradecimientos
+
+Bootcamp 4.0 – Devlights, por el acompañamiento y los conocimientos brindados.
 
 
 
