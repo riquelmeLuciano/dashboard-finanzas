@@ -76,7 +76,7 @@ Las fuentes se consumen mediante APIs públicas y se integran en un pipeline ETL
 
 ## 🌐 Dashboard Web
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://monitorfinanciero-tytyevfsnybzcmu5twqtlh.streamlit.app/)
+🔗 **Acceso directo al Dashboard**: [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://monitorfinanciero-tytyevfsnybzcmu5twqtlh.streamlit.app/)
 
 ### ✨ Funcionalidades
 
