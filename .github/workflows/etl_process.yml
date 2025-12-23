@@ -1,0 +1,36 @@
+name: Ejecutar Proceso ETL
+
+on:
+  push:
+    branches: [ "main" ]
+  schedule:
+    # Se ejecuta todos los días a las 00:00 UTC
+    - cron: '0 10 * * *'
+  workflow_dispatch: # Permite ejecutarlo manualmente
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Ejecutar Script ETL
+        env:
+          # conectamos el secreto de GitHub
+          DATABASE_URL_NEON: ${{ secrets.DATABASE_URL_NEON }}
+        run: |
+          python Script/DOLAR_AHORA_ETL.py
+          python Script/DOLAR_hist_ETL.py
+          python Script/plazoFijo_api_ETL.py
