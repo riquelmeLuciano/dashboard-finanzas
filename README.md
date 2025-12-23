@@ -26,6 +26,9 @@ Proyecto final del Bootcamp 4.0 (Devlights), enfocado en el análisis, procesami
 PROYECTO FINAL/
 │
 ├── .devcontainer/                 # Configuración del entorno de desarrollo (Docker)
+|
+├── .github/workflows/             # Automatización con GitHub Actions
+│   └── etl_process.yml            # Configuración de ejecución diaria de los ETLs
 │
 ├── Dashboard/
 │   └── monitor_financiero.py      # Aplicación de visualización (Streamlit)
