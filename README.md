@@ -139,7 +139,7 @@ Las fuentes se consumen mediante APIs públicas y se integran en un pipeline ETL
 - [ ] Análisis de Escenarios (Optimista/Base/Pesimista)
 - [ ] Notificaciones y alertas automáticas
 - [ ] Exportar reportes en PDF/Excel
-- [ ] Automatizar los procesos ETL
+- [✓] Automatizar los procesos ETL
 
 ### Futuras mejoras
 - [ ] Integración con más activos (CEDEARs, Bonos, ...)
