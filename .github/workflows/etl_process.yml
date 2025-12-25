@@ -34,3 +34,5 @@ jobs:
           python Script/DOLAR_AHORA_ETL.py
           python Script/DOLAR_hist_ETL.py
           python Script/plazoFijo_api_ETL.py
+          python Script/FCI_api_ETL.py
+          python Script/INFLACION_api_ETL.py
