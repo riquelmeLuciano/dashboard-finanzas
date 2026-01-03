@@ -19,7 +19,7 @@ NOMBRE_TABLA = "rendimientos_fci"
 DIAS_A_CONSULTAR = 10
 BILLETERAS_OBJETIVO = {
     "Ualá": ["ualintec", "uala"],
-    "Mercado Pago": ["mercado fondo ahorro - clase b"], # Clase B para evitar duplicados del Clase A
+    "Mercado Pago": ["mercado fondo ahorro - clase b"],
     "Personal Pay": ["delta pesos", "delta ahorro"]
 }
 
@@ -34,8 +34,7 @@ def crear_tabla_postgres():
         cur = conn.cursor()
         
         # SQL para crear la tabla
-        # SERIAL es el equivalente a AUTOINCREMENT
-        # NUMERIC(18, 6) asegura que guardemos los 6 decimales del VCP con precisión exacta
+
         query = f"""
         CREATE TABLE IF NOT EXISTS {NOMBRE_TABLA} (
             id SERIAL PRIMARY KEY,
@@ -83,9 +82,9 @@ def procesar_api_e_insertar():
         
         for i in range(DIAS_A_CONSULTAR):
             fecha_obj = fecha_actual - timedelta(days=i)
-            # La API usa formato YYYY/MM/DD
+            # la API usa formato YYYY/MM/DD
             fecha_str_api = fecha_obj.strftime("%Y/%m/%d")
-            # Para la DB usamos formato estándar YYYY-MM-DD
+            # para la DB usamos formato estándar YYYY-MM-DD
             fecha_str_db = fecha_obj.strftime("%Y-%m-%d")
             
             url = f"https://api.argentinadatos.com/v1/finanzas/fci/mercadoDinero/{fecha_str_api}"
@@ -102,7 +101,7 @@ def procesar_api_e_insertar():
                 response.raise_for_status()
                 datos_api = response.json()
                 
-                # Filtrado en memoria
+                # filtrado en memoria
                 encontrados_dia = []
                 billeteras_procesadas_hoy = set()
                 
@@ -151,8 +150,8 @@ def procesar_api_e_insertar():
             except requests.exceptions.RequestException as e:
                 print(f"❌ Error API: {e}")
             
-            # Pequeña pausa para no saturar
-            time.sleep(0.2)
+            # pausa para no saturar
+            time.sleep(0.5)
 
         print("-" * 60)
         print(f"🚀 Proceso de carga finalizado. Nuevos registros: {nuevos_registros}")
@@ -227,13 +226,13 @@ def actualizar_tna_existentes():
 
 # --- EJECUCIÓN PRINCIPAL ---
 if __name__ == "__main__":
-    # 1. Preparar DB
+    # Preparar DB
     crear_tabla_postgres()
     
-    # 2. Descargar de API e Insertar (Sin CSV)
+    # Descargar de API e Insertar
     procesar_api_e_insertar()
     
-    # 3. Calcular matemáticas financieras (TNA)
+    # Calcular matemáticas financieras (TNA)
     actualizar_tna_existentes()
 
 

@@ -120,20 +120,20 @@ class ExtractorDolar:
             conn = psycopg2.connect(DATABASE_URL)
             cur = conn.cursor()
             
-            # 1. BORRAR DATOS VIEJOS
+            # BORRAR DATOS VIEJOS
             # Usamos TRUNCATE para vaciar la tabla completamente antes de guardar lo nuevo
             cur.execute("TRUNCATE TABLE cotizaciones_dolar RESTART IDENTITY;")
 
             fecha_actual = datetime.now()
             registros_guardados = 0
             
-            # 2. INSERTAR DATOS NUEVOS
+            # INSERTAR DATOS NUEVOS
             for tipo, valores in cotizaciones.items():
                 compra = valores['compra']
                 venta = valores['venta']
                 promedio = (compra + venta) / 2
                 
-                # Insert simple (ya no necesitamos ON CONFLICT porque la tabla está vacía)
+                # Insert simple
                 query = """
                 INSERT INTO cotizaciones_dolar (fecha, tipo, compra, venta, promedio)
                 VALUES (%s, %s, %s, %s, %s)
@@ -163,17 +163,17 @@ def ejecutar_extraccion_completa():
     
     extractor = ExtractorDolar()
     
-    # 1. Crear tabla si no existe
+    # Crear tabla si no existe
     extractor.crear_tabla_db()
     
-    # 2. Obtener cotizaciones
+    # Obtener cotizaciones
     cotizaciones = extractor.obtener_cotizaciones()
     
     if not cotizaciones:
         print("\n❌ No se pudieron obtener cotizaciones")
         return
     
-    # 4. Guardar en base de datos
+    # Guardar en base de datos
     print("\n💾 Guardando en PostgreSQL...")
     registros = extractor.guardar_en_db(cotizaciones)
     
@@ -188,6 +188,6 @@ def ejecutar_extraccion_completa():
 
 if __name__ == "__main__":
     
-    # Opción 1: Extracción completa (recomendado)
+    # Extracción completa
     ejecutar_extraccion_completa()
 

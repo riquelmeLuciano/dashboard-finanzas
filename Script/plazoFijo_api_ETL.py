@@ -57,26 +57,26 @@ def guardar_tasas_plazo_fijo():
         # Fecha de registro = Hoy (ya que esta API da el valor 'actual')
         fecha_hoy = datetime.now().strftime("%Y-%m-%d")
         
-        # 2. Conectar a DB
+        # Conectar a DB
         conn = psycopg2.connect(DATABASE_URL)
         cur = conn.cursor()
         
         nuevos = 0
         actualizados = 0
         
-        # 3. Procesar cada banco
+        # Procesar cada banco
         for banco in datos:
             entidad = banco.get("entidad", "Desconocido")
             tna_clientes = banco.get("tnaClientes")
             tna_no_clientes = banco.get("tnaNoClientes")
             
-            # Limpieza básica de datos (si viene null)
+            # Limpieza de datos (si viene null)
             if tna_clientes is None: tna_clientes = 0
             if tna_no_clientes is None: tna_no_clientes = 0
             
             # SQL Upsert:
             # - Intenta Insertar
-            # - Si ya existe (mismo banco, misma fecha) -> Actualiza los valores (por si la API corrigió el dato durante el día)
+            # - Si ya existe (mismo banco, misma fecha) -> Actualiza los valores
             query = sql.SQL("""
                 INSERT INTO {} (entidad, fecha, tna_clientes, tna_no_clientes)
                 VALUES (%s, %s, %s, %s)
@@ -88,9 +88,7 @@ def guardar_tasas_plazo_fijo():
             
             cur.execute(query, (entidad, fecha_hoy, tna_clientes, tna_no_clientes))
             
-            # Verificar qué pasó (insert o update)
-            # En Postgres es difícil saber exacto con rowcount en upsert, 
-            # pero asumiremos que procesó correctamente.
+            # Verificar que paso (insert o update)
             nuevos += 1
 
         conn.commit()

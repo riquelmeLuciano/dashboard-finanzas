@@ -9,7 +9,7 @@ load_dotenv()
 # --- CONFIGURACIÓN DE TU BASE DE DATOS ---
 DATABASE_URL = os.getenv("DATABASE_URL_NEON") 
 
-# Tipos de dólar a consultar
+# Tipos de dolar a consultar
 TIPOS_DOLAR = ["oficial", "blue", "bolsa", "contadoconliqui", "mayorista", "cripto", "tarjeta"]
 
 def crear_tabla_historica():
@@ -46,12 +46,12 @@ def crear_tabla_historica():
 
 def guardar_historial_db():
     try:
-        # 1. Conexión a la Base de Datos
+        # Conexion a la Base de Datos
         conn = psycopg2.connect(DATABASE_URL)
         cur = conn.cursor()
         print("✅ Conexión a la base de datos exitosa.")
 
-        # 2. Recorremos cada tipo de dólar
+        # Recorremos cada tipo de dolar
         for tipo in TIPOS_DOLAR:
             url = f"https://api.argentinadatos.com/v1/cotizaciones/dolares/{tipo}"
             
@@ -60,7 +60,7 @@ def guardar_historial_db():
 
             anio_actual = datetime.now().year
 
-            # 3. Insertamos registro por registro
+            # Insertamos registro por registro
             registros_nuevos = 0
             for fila in datos:
                 # Mapeo de datos
@@ -88,7 +88,7 @@ def guardar_historial_db():
                 cur.execute(query, (fecha, tipo_formateado, compra, venta, promedio))
                 registros_nuevos += 1
 
-        # 4. Guardar cambios
+        # Guardar cambios
         conn.commit()
         print(f"🚀 {registros_nuevos} registros históricos guardados")
 

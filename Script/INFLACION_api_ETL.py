@@ -49,7 +49,7 @@ class ExtractorInflacion:
             for dato in datos_api:
                 fecha_dato = datetime.strptime(dato['fecha'], '%Y-%m-%d')
     
-                # Filtrar solo últimos 12 meses
+                # Filtrar solo los datos del último año
                 if fecha_dato >= fecha_limite:
                     inflacion.append({
                         'fecha': dato['fecha'],
@@ -113,7 +113,7 @@ class ExtractorInflacion:
 
             registros_guardados = 0
             
-            # 2. INSERTAR DATOS NUEVOS
+            # INSERTAR DATOS NUEVOS
             for dato in inflacion:
                 fecha = dato['fecha']
                 valor = dato['valor']
