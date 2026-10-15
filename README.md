@@ -48,7 +48,6 @@ PROYECTO FINAL/
 │   ├── INFLACION_api_ETL.py        # ETL de inflación mensual en Argentina
 │   └── plazoFijo_api_ETL.py        # ETL de tasas de plazo fijo (histórico)
 │
-├── .env.example                    # Ejemplo de variables de entorno
 ├── .gitignore                      # Archivos ignorados por Git
 ├── backup_finanzas.sql             # Backup de la base de datos
 ├── docker-compose.yml              # Orquestación de servicios con Docker
