@@ -5,6 +5,7 @@ pandas
 matplotlib
 seaborn
 psycopg2-binary
+psycopg[binary]
 sqlalchemy
 python-dotenv
 requests
